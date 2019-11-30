@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AltoMobileProject</string>
+    <string name="facebook_app_id">300558883661598</string>
+    <string name="fb_login_protocol_scheme">fb300558883661598</string>
+    <string name="default_image">
+        https://i.pinimg.com/originals/4d/3c/5f/4d3c5f4f4a4527ae3854a1dcac7ee198.png
+    </string>
+    <string name="data">
+        https://flavioruben.herokuapp.com/data.json
+    </string>
+</resources>
