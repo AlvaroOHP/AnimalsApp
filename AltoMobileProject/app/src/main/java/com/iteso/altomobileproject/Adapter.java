@@ -1,7 +1,6 @@
 package com.iteso.altomobileproject;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +8,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class Adapter extends BaseAdapter {
 
-    private Context context;
-    private ArrayList<Animal> Animals;
+    private final Context context;
+    private final  ArrayList<Animal> Animals;
 
     public  Adapter(Context context, ArrayList<Animal> animals) {
         this.context = context;
@@ -48,14 +45,14 @@ public class Adapter extends BaseAdapter {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = (View) inflater.inflate(
+            convertView =  inflater.inflate(
                     R.layout.list, null);
         }
 
-        TextView name = (TextView) convertView.findViewById(R.id.list_entry_name);
+        TextView name =  convertView.findViewById(R.id.list_entry_name);
 
 
-        ImageView ivBasicImage = (ImageView) convertView.findViewById(R.id.image);
+        ImageView ivBasicImage = convertView.findViewById(R.id.image);
 
         String imageUri = Animals.get(position).getPictureURL();
 

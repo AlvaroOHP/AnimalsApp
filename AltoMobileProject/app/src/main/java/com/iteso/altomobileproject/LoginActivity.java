@@ -13,7 +13,7 @@ import com.facebook.login.widget.LoginButton;
 import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
-    CallbackManager callbackManager = CallbackManager.Factory.create();
+    private final CallbackManager  callbackManager = CallbackManager.Factory.create();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        LoginButton loginButton =  findViewById(R.id.login_button);
         loginButton.setPermissions((Arrays.asList("email")));
 
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {

@@ -1,8 +1,6 @@
 package com.iteso.altomobileproject;
 
-import android.app.DownloadManager;
 import android.app.ListActivity;
-
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,15 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.facebook.CallbackManager;
+import android.widget.Toast;
+
 import com.facebook.login.LoginManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
-
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -29,9 +26,9 @@ import okhttp3.Response;
 
 public class MainActivity extends ListActivity {
 
-    CallbackManager callbackManager = CallbackManager.Factory.create();
+    //CallbackManager callbackManager = CallbackManager.Factory.create();
 
-    public  ArrayList<Animal> Animals = new ArrayList<Animal>();
+    private final ArrayList<Animal> Animals = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +36,7 @@ public class MainActivity extends ListActivity {
         LayoutInflater inflater = getLayoutInflater();
         ViewGroup header = (ViewGroup)inflater.inflate(R.layout.header,getListView(),false);
         getListView().addHeaderView(header);
-        TextView log_out = (TextView) findViewById(R.id.log_out);
+        TextView log_out = findViewById(R.id.log_out);
 
 
         try {
@@ -65,7 +62,7 @@ public class MainActivity extends ListActivity {
 
     }
 
-    public void getHttpResponse() throws IOException {
+    private void getHttpResponse() throws IOException {
 
         String url = this.getString(R.string.data);
 
@@ -81,7 +78,7 @@ public class MainActivity extends ListActivity {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                String mMessage = e.getMessage().toString();
+                String mMessage = e.getMessage();
                 Log.w("failure Response", mMessage);
                 //call.cancel();
             }
@@ -89,11 +86,9 @@ public class MainActivity extends ListActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 
-                String mMessage = response.body().string();
-
                 if(response.isSuccessful()) {
                     try {
-
+                        String mMessage = response.body().string();
                         JSONArray jason = new JSONArray(mMessage);
                         for (int i = 0; i < jason.length(); i++) {
                             JSONObject obj = jason.getJSONObject(i);
@@ -118,6 +113,8 @@ public class MainActivity extends ListActivity {
 
                     } catch (JSONException e) {
                         Log.e("JsonError", "unexpected JSON exception", e);
+                        Toast toast = Toast.makeText(MainActivity.this, "Connection failed, please try again", Toast.LENGTH_SHORT);
+                        toast.show();
                     }
                 }
 

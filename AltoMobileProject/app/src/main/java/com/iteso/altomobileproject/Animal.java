@@ -1,10 +1,10 @@
 package com.iteso.altomobileproject;
 
 public class Animal {
-    String name;
-    int life;
-    int id;
-    String pictureURL;
+    private String name;
+    private int life;
+    private int id;
+    private String pictureURL;
 
     public Animal(String name, int life, int id, String pictureURL){
         this.name=name;
